@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- Import tModLoader mod properties -->
+	<Import Project="..\tModLoader.targets" />
+
+	<!-- General -->
+	<PropertyGroup>
+		
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Content\Buffs\BlessingBuff.png" />
+	  <None Remove="Content\Items\Accessories\RadahnsGreatRune.png" />
+	  <None Remove="Content\Items\Consumables\RuneArc.png" />
+	  <None Remove="Content\Items\Weapons\Melee\BlasphemousBlade.png" />
+	  <None Remove="Localization\ru-RU_Mods.EldenRingItems.hjson" />
+	  <None Remove="Projectiles\Melee\BloodSlash.png" />
+	</ItemGroup>
+
+	<!-- References -->
+
+</Project>
