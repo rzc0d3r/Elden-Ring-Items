@@ -19,24 +19,25 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         bool BonusLimit = false;
 
         // Blade default properties (without holding bonus)
-        int BaseDamage = 75;
+        int BaseDamage = 55;
         float BaseKnockBack = 5f;
         float BaseShootSpeed = 14f;
 
         SoundStyle BladeMaxChargeSound = new SoundStyle("EldenRingItems/Sounds/TogethaAsFamilee");
         SoundStyle BladeStartChargingSound = new SoundStyle("EldenRingItems/Sounds/DemonshadeEnrage"); 
-
-        public override void SetStaticDefaults()
-        {
-            // 20 - Number of ticks after which the frame will change (3.5 frames per 60FPS); 8 - Quantity of frames in a blade texture
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(17, 8));
-            // Allows animation rendering not only in the inventory, but also in the world
-            ItemID.Sets.AnimatesAsSoul[Type] = true;
-        }
+        SoundStyle BladeShootSound = SoundID.Item60;
+        
+        //public override void SetStaticDefaults()
+        //{
+        //    // 20 - Number of ticks after which the frame will change (3.5 frames per 60FPS); 8 - Quantity of frames in a blade texture
+        //    Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(17, 8));
+        //    // Allows animation rendering not only in the inventory, but also in the world
+        //    ItemID.Sets.AnimatesAsSoul[Type] = true;
+        //}
 
         public override void SetDefaults()
         {
-            Item.width = 94;
+            Item.width = 92;
             Item.height = 92;
             Item.DamageType = DamageClass.Melee;
             Item.damage = BaseDamage;
@@ -48,7 +49,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 75, 0, 0);
-            Item.rare = ItemRarityID.LightPurple;
+            Item.rare = ItemRarityID.LightRed;
 
             Item.shoot = ModContent.ProjectileType<BloodSlash>();
             Item.shootSpeed = BaseShootSpeed;
@@ -82,11 +83,14 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 {
                     MadeChargedAttacks++;
                     SoundEngine.PlaySound(SoundID.Item73, position);
-                    player.Heal(Main.rand.Next(15, 41));
+                    player.Heal(Main.rand.Next(15, 31));
                 }
             }
             else
-                SoundEngine.PlaySound(SoundID.Item60, position);
+            {
+                BladeShootSound.Volume = 0.5f;
+                SoundEngine.PlaySound(BladeShootSound, position);
+            }
             return true;
         }
 
@@ -98,10 +102,10 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 {
                     HoldingCount++;
                     HoldingDamageBonus += 0.003f;
-                    Item.damage = Convert.ToInt32(BaseDamage * HoldingDamageBonus);
+                    Item.damage = Convert.ToInt32(BaseDamage * (HoldingDamageBonus/1.7));
                     if (HoldingCount == 25) // Take away player's health every 25 mouseRight-holding events processed
                     {
-                        player.Hurt(PlayerDeathReason.ByCustomReason(""), 18, player.direction, armorPenetration: 1000);
+                        player.Hurt(PlayerDeathReason.ByCustomReason(""), Main.rand.Next(10, 21), player.direction, armorPenetration: 1000);
                         HoldingCount = 0;
                     }
                 }

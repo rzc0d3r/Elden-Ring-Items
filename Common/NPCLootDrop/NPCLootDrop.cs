@@ -12,7 +12,7 @@ namespace EldenRingItems.Common.NPCLootDrop
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            // BlasphemousBlade
+            // Blasphemous Blade
             if (npc.type == NPCID.BloodEelHead)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BlasphemousBlade>(), 12));
             if (npc.type == NPCID.BloodNautilus)
@@ -20,6 +20,9 @@ namespace EldenRingItems.Common.NPCLootDrop
             // Rune Arc
             if (npc.type == NPCID.Pixie)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RuneArc>(), 8));
+            // Gian Crusher
+            if (npc.type == NPCID.Golem)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GiantCrusher>(), 1));
         }
     }
 }

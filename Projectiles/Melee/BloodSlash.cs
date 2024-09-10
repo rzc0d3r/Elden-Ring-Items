@@ -4,8 +4,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using EldenRingItems.Content.Items.Weapons;
-
 namespace EldenRingItems.Projectiles.Melee
 {
     public class BloodSlash : ModProjectile
