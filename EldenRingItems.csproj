@@ -11,6 +11,16 @@
 	  <None Remove="Content\Buffs\BlessingBuff.png" />
 	  <None Remove="Content\Items\Accessories\RadahnsGreatRune.png" />
 	  <None Remove="Content\Items\Consumables\RuneArc.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberAncientDragonSmithingStone.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones1.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones2.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones3.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones4.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones5.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones6.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones7.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones8.png" />
+	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones9.png" />
 	  <None Remove="Content\Items\Weapons\Melee\BlasphemousBlade.png" />
 	  <None Remove="Localization\ru-RU_Mods.EldenRingItems.hjson" />
 	  <None Remove="Projectiles\Melee\BloodSlash.png" />

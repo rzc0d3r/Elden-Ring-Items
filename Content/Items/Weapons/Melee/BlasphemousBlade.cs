@@ -6,34 +6,35 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using System;
+using Terraria.Localization;
+using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
 
 namespace EldenRingItems.Content.Items.Weapons.Melee
 {
     public class BlasphemousBlade : ModItem
     {
-        // MouseRight holding bonus
-        float HoldingDamageBonus = 1f;
+        public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/BlasphemousBlade";
+        public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
+
+        const int MAX_CHARGED_ATTACKS = 5;
+        const int MIN_HEAL = 10;
+        const int MAX_HEAL = 25;
+
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MIN_HEAL*MAX_CHARGED_ATTACKS, MAX_HEAL*MAX_CHARGED_ATTACKS, MAX_CHARGED_ATTACKS);
+
         float HoldingCount = 0;
         bool BladeIsCharged = false;
         int MadeChargedAttacks = 0;
-        bool BonusLimit = false;
+        int HurtCount = 0;
 
-        // Blade default properties (without holding bonus)
-        int BaseDamage = 55;
+        public int BaseDamage { get; set; } = 55;
         float BaseKnockBack = 5f;
         float BaseShootSpeed = 14f;
 
-        SoundStyle BladeMaxChargeSound = new SoundStyle("EldenRingItems/Sounds/TogethaAsFamilee");
-        SoundStyle BladeStartChargingSound = new SoundStyle("EldenRingItems/Sounds/DemonshadeEnrage"); 
-        SoundStyle BladeShootSound = SoundID.Item60;
-        
-        //public override void SetStaticDefaults()
-        //{
-        //    // 20 - Number of ticks after which the frame will change (3.5 frames per 60FPS); 8 - Quantity of frames in a blade texture
-        //    Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(17, 8));
-        //    // Allows animation rendering not only in the inventory, but also in the world
-        //    ItemID.Sets.AnimatesAsSoul[Type] = true;
-        //}
+        SoundStyle BladeIsChargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.832");
+        SoundStyle BladeIsDichargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.833");
+        SoundStyle DefaultShootSound = SoundID.Item60;
+        SoundStyle ChargedShootSound = SoundID.Item73;
 
         public override void SetDefaults()
         {
@@ -53,15 +54,14 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
             Item.shoot = ModContent.ProjectileType<BloodSlash>();
             Item.shootSpeed = BaseShootSpeed;
-        
         }
+
         void ResetBladeBonus()
         {
             HoldingCount = 0;
+            HurtCount = 0;
             MadeChargedAttacks = 0;
-            HoldingDamageBonus = 1f;
             BladeIsCharged = false;
-            BonusLimit = false;
             Item.shoot = ModContent.ProjectileType<BloodSlash>();
             Item.damage = BaseDamage;
             Item.knockBack = BaseKnockBack;
@@ -74,22 +74,20 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         {
             if (BladeIsCharged)
             {
-                if (MadeChargedAttacks > 4) // 5 attacks (0, 1, 2, 3, 4)
+                MadeChargedAttacks++;
+                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS)
                 {
+                    BladeIsDichargedSound.Volume = 1f;
+                    SoundEngine.PlaySound(BladeIsDichargedSound);
                     ResetBladeBonus();
-                    return false;
+                    return true;
                 }
-                else
-                {
-                    MadeChargedAttacks++;
-                    SoundEngine.PlaySound(SoundID.Item73, position);
-                    player.Heal(Main.rand.Next(15, 31));
-                }
+                SoundEngine.PlaySound(ChargedShootSound);
             }
             else
             {
-                BladeShootSound.Volume = 0.5f;
-                SoundEngine.PlaySound(BladeShootSound, position);
+                DefaultShootSound.Volume = 0.8f;
+                SoundEngine.PlaySound(DefaultShootSound);
             }
             return true;
         }
@@ -98,28 +96,20 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         {
             if (Main.mouseRight)
             {
-                if (HoldingDamageBonus < 3f)
+                if (HurtCount < 7)
                 {
                     HoldingCount++;
-                    HoldingDamageBonus += 0.003f;
-                    Item.damage = Convert.ToInt32(BaseDamage * (HoldingDamageBonus/1.7));
-                    if (HoldingCount == 25) // Take away player's health every 25 mouseRight-holding events processed
+                    if (HoldingCount == 25) // every 25 mouseRight-holding events processed
                     {
-                        player.Hurt(PlayerDeathReason.ByCustomReason(""), Main.rand.Next(10, 21), player.direction, armorPenetration: 1000);
                         HoldingCount = 0;
+                        HurtCount++;
                     }
                 }
-                else
-                    if (!BonusLimit) // Will only play the blade max charge sound 1 time
-                    {
-                        BonusLimit = true;
-                        BladeMaxChargeSound.Volume = 0.8f;
-                        SoundEngine.PlaySound(BladeMaxChargeSound, player.position);
-                    }
-                if (HoldingDamageBonus >= 2f && !BladeIsCharged) // The blade is charged when the damage multiplier >= 2x
+                else if (HurtCount == 7 && !BladeIsCharged)
                 {
                     // Changing blade properties
-                    SoundEngine.PlaySound(BladeStartChargingSound, player.position); 
+                    BladeIsChargedSound.Volume = 0.65f;
+                    SoundEngine.PlaySound(BladeIsChargedSound); 
                     BladeIsCharged = true;
                     Item.shoot = ProjectileID.InfernoFriendlyBlast;
                     Item.shootSpeed = 20f;
@@ -130,4 +120,142 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             }
         }
     }
+
+    #region Upgrade
+    public abstract class UpgradedBlasphemousBlade : BlasphemousBlade
+    {
+        public int UpgradeLevel { get; set; }
+        public Recipe recipe { get; set; }
+        public override LocalizedText Tooltip => ModContent.GetModItem(ModContent.ItemType<BlasphemousBlade>()).Tooltip;
+        public override LocalizedText DisplayName => ModContent.GetModItem(ModContent.ItemType<BlasphemousBlade>()).DisplayName.WithFormatArgs($" +{UpgradeLevel}");
+        
+        protected UpgradedBlasphemousBlade(int upgradeLevel)
+        {
+            UpgradeLevel = upgradeLevel;
+        }
+
+        public override void SetDefaults()
+        {
+            BaseDamage += UpgradeLevel * 10;
+            base.SetDefaults();
+        }
+
+        public override void AddRecipes()
+        {
+            recipe = CreateRecipe();
+            recipe.AddIngredient(SSSUtils.GetSSSByLevel(UpgradeLevel));
+            recipe.AddTile(SSSUtils.GetTileByLevel(UpgradeLevel));
+        }
+    }
+
+    public class BlasphemousBlade1 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade1() : base(1) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade2 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade2() : base(2) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade1>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade3 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade3() : base(3) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade2>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade4 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade4() : base(4) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade3>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade5 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade5() : base(5) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade4>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade6 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade6() : base(6) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade5>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade7 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade7() : base(7) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade6>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade8 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade8() : base(8) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade7>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade9 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade9() : base(9) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade8>());
+            recipe.Register();
+        }
+    }
+
+    public class BlasphemousBlade10 : UpgradedBlasphemousBlade
+    {
+        public BlasphemousBlade10() : base(10) { }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            recipe.AddIngredient(ModContent.ItemType<BlasphemousBlade9>());
+            recipe.Register();
+        }
+    }
+    #endregion
 }

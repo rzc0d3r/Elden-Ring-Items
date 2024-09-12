@@ -17,14 +17,15 @@ Items: {
 	}
 
 	BlasphemousBlade: {
-		DisplayName: Blasphemous blade
+		DisplayName: Blasphemous blade{0}
 		Tooltip:
 			'''
-			When holding it in your hand, press [c/939393:right mouse button] to increase the damage [c/757575:(in exchange for health)].
-			When the sword has taken the right amount of your health it will become [c/0078bd:charged] and make a special sound
+			When holding it in your hand, press [c/939393:right mouse button] to charge the sword
+			When the sword becomes [c/0078bd:charged] it will emit a special sound
 			Attacking from the [c/0078bd:charged state] releases super-fast blast waves that cast [c/c90000:Hellfire]
-			on the target and replenish between [c/980000:75] and [c/980000:150] of your health
-			Attack from [c/939393:Normal State] strikes with a blood wave that replenishes [c/980000:1] to [c/980000:5] of your health.
+			on the target and replenish between [c/980000:{0}] and [c/980000:{1}] of your health
+			When the sword loses charge (after [c/980000:{2}] [c/0078bd:charged] strikes), it will make a special sound
+			An attack from [c/939393:normal state] strikes with a blood wave that replenishes between [c/980000:1] and [c/980000:5] of your health.
 			[c/757575:Sacred Sword of Rickard, Blasphemous Lord].
 			[c/75757575:The remains of the countless heroes he devoured wriggle on the surface of this blade].
 			[c/75757575:They are now one family, bound by ties of blood]
@@ -32,12 +33,115 @@ Items: {
 	}
 
 	GiantCrusher: {
-		DisplayName: Giant crusher
+		DisplayName: Giant crusher{0}
 		Tooltip:
 			'''
 			[c/757575:A hammer made from a boulder, used in the War against the Giants.]
 			[c/757575:One of the heftiest weapons in the entire Lands Between.]
 			[c/757575:After the giants were quelled, and man turned against man in violence, this weapon was all but forgotten.]
+			'''
+	}
+
+	SomberSmithingStones1: {
+		DisplayName: Somber Smithing Stones [1]
+		Tooltip:
+			'''
+			Reinforce armaments to +1
+			[c/757575:Shard of smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones2: {
+		DisplayName: Somber Smithing Stones [2]
+		Tooltip:
+			'''
+			Reinforce armaments to +2
+			[c/757575:Large shard of smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones3: {
+		DisplayName: Somber Smithing Stones [3]
+		Tooltip:
+			'''
+			Reinforce armaments to +3
+			[c/757575:Hard smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones4: {
+		DisplayName: Somber Smithing Stones [4]
+		Tooltip:
+			'''
+			Reinforce armaments to +4
+			[c/757575:Large hard smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones5: {
+		DisplayName: Somber Smithing Stones [5]
+		Tooltip:
+			'''
+			Reinforce armaments to +5
+			[c/757575:Gold smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones6: {
+		DisplayName: Somber Smithing Stones [6]
+		Tooltip:
+			'''
+			Reinforce armaments to +6
+			[c/757575:Large gold smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones7: {
+		DisplayName: Somber Smithing Stones [7]
+		Tooltip:
+			'''
+			Reinforce armaments to +7
+			[c/757575:Polar smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones8: {
+		DisplayName: Somber Smithing Stones [8]
+		Tooltip:
+			'''
+			Reinforce armaments to +8
+			[c/757575:Large polar smithing stone drained of color.]
+			'''
+	}
+
+	SomberSmithingStones9: {
+		DisplayName: Somber Smithing Stones [9]
+		Tooltip:
+			'''
+			Reinforce armaments to +9
+			[c/757575:Ancient smithing stone drained of color.]
+			'''
+	}
+
+	SomberAncientDragonSmithingStone: {
+		DisplayName: Somber Ancient Dragon Smithing Stone
+		Tooltip:
+			'''
+			Reinforce armaments to +10
+			[c/757575:Ancient dragonrock smithing stone drained of color.]
+			[c/757575:A scale of the Ancient Dragonlord and hidden treasure of Farum Azula.]
+			[c/757575:The Ancient Dragonlord's seat is said to lie beyond time.]
+			[c/757575:This stone lightly twists time, allowing the creation of a weapon capable of slaying a god.]
+			'''
+	}
+
+	DarkMoonGreatsword: {
+		DisplayName: Dark Moon Greatsword{0}
+		Tooltip:
+			'''
+			[c/757575:A Moon Greatsword, bestowed by a Carian queen upon her spouse to honor long-standing tradition.]
+			[c/757575:One of the legendary armaments.]
+			[c/757575:Ranni's sigil is a full moon, cold and leaden, and this sword is but a beam of its light.]
 			'''
 	}
 }
@@ -52,4 +156,5 @@ Buffs: {
 Projectiles: {
 	BloodSlash.DisplayName: Blood Slash
 	GiantCrusherProj.DisplayName: Giant Crusher Proj
+	DarkMoonGreatswordProj.DisplayName: Dark Moon Greatsword Proj
 }

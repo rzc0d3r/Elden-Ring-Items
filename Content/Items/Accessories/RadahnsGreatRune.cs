@@ -41,6 +41,7 @@ namespace EldenRingItems.Content.Items.Accessories
             r.AddIngredient(ItemID.SoulofLight, 6); 
             r.AddIngredient(ItemID.LifeCrystal, 1);
             r.AddIngredient(ItemID.ManaCrystal, 1);
+            r.AddTile(TileID.MythrilAnvil);
             r.Register();
         }
     }
