@@ -14,12 +14,12 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
     public class BlasphemousBlade : ModItem
     {
         public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/BlasphemousBlade";
-        public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
 
         const int MAX_CHARGED_ATTACKS = 5;
         const int MIN_HEAL = 10;
         const int MAX_HEAL = 25;
 
+        public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MIN_HEAL*MAX_CHARGED_ATTACKS, MAX_HEAL*MAX_CHARGED_ATTACKS, MAX_CHARGED_ATTACKS);
 
         float HoldingCount = 0;

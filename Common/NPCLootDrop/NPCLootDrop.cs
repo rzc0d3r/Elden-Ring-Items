@@ -23,6 +23,14 @@ namespace EldenRingItems.Common.NPCLootDrop
             // Gian Crusher
             if (npc.type == NPCID.Golem)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GiantCrusher>(), 1));
+            // Dark Moon Greatsword
+            if (npc.type == NPCID.CultistBoss)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DarkMoonGreatsword>(), 1));
+            // Rivers Of Blood
+            if (npc.type == NPCID.BloodEelHead)
+               npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RiversOfBlood>(), 12));
+            if (npc.type == NPCID.BloodNautilus)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RiversOfBlood>(), 4));
         }
     }
 }

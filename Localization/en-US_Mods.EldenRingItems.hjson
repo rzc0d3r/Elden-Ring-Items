@@ -139,9 +139,29 @@ Items: {
 		DisplayName: Dark Moon Greatsword{0}
 		Tooltip:
 			'''
+			When holding it in your hand, press [c/939393:right mouse button] to charge the sword (spends [c/4110a3:{0}] mana)
+			When the sword becomes [c/0078bd:charged] it will make a special sound, and it will also become brighter in your inventory
+			Attacking from [c/0078bd:charged state] releases super-fast waves
+			The sword will lose its charge (after dealing [c/980000:{1}] [c/0078bd:charged] blows)
+			Attack from [c/939393:normal state] makes normal sword strikes
 			[c/757575:A Moon Greatsword, bestowed by a Carian queen upon her spouse to honor long-standing tradition.]
 			[c/757575:One of the legendary armaments.]
 			[c/757575:Ranni's sigil is a full moon, cold and leaden, and this sword is but a beam of its light.]
+			'''
+	}
+
+	RiversOfBlood: {
+		DisplayName: Rivers Of Blood{0}
+		Tooltip:
+			'''
+			When holding it in your hand, press [c/939393:right mouse button] to charge the katana (spends [c/4110a3:{0}] mana)
+			When the katana becomes [c/0078bd:charged] it will make a special sound
+			Attacking from the [c/0078bd:charged state] makes super-fast piercing blows that inflict debuff [c/4110a3:Venom] on the target
+			Attacking from [c/939393:normal state] deals normal katana strikes
+			[c/757575:Weapon of Okina, swordsman from the Land of Reeds.]
+			[c/757575:A cursed weapon that has felled countless men.]
+			[c/757575:When Mohg, the Lord of Blood, first felt Okina's sword, and madness,]
+			[c/757575:upon his flesh, he had a proposal, to offer Okina the life of a demon, whose thirst would never go unsated.]
 			'''
 	}
 }
@@ -157,4 +177,5 @@ Projectiles: {
 	BloodSlash.DisplayName: Blood Slash
 	GiantCrusherProj.DisplayName: Giant Crusher Proj
 	DarkMoonGreatswordProj.DisplayName: Dark Moon Greatsword Proj
+	RiversOfBloodProj.DisplayName: Rivers Of Blood Proj
 }
