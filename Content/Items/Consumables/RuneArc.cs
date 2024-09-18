@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.Audio;
 
 using EldenRingItems.Common.Players;
-using EldenRingItems.Content.Buffs;
+using EldenRingItems.Content.Buffs.StatBuff;
 
 namespace EldenRingItems.Content.Items.Consumables
 {
@@ -21,6 +21,7 @@ namespace EldenRingItems.Content.Items.Consumables
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.maxStack = 9999;
+            Item.mana = 60;
         }
 
         public override bool CanUseItem(Player player)

@@ -7,9 +7,10 @@ using Terraria.Audio;
 
 namespace EldenRingItems.Projectiles.Melee
 {
-    public class DarkMoonGreatswordProj : ModProjectile
+    public class MoonveilProj : ModProjectile
     {
         public SoundStyle hitSound = new SoundStyle("EldenRingItems/Sounds/cs_c3320_13");
+        public override string Texture => "EldenRingItems/Projectiles/Melee/DarkMoonGreatswordProj";
 
         public override void SetDefaults()
         {
@@ -18,17 +19,18 @@ namespace EldenRingItems.Projectiles.Melee
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 1;
-            Projectile.penetrate = 1;
-            Projectile.timeLeft = 800;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 300;
             Projectile.friendly = true;
-            Projectile.scale = 2f;
+            Projectile.scale = 3f;
         }
 
         public override void AI()
         {
             Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + MathHelper.PiOver2;
-
-            Lighting.AddLight(Projectile.Center, 0.4f, 0f, 0.6f);
+            Dust d1 = Dust.NewDustPerfect(Projectile.Top, DustID.BlueTorch, Scale: Main.rand.NextFloat(0.5f, 1.2f));
+            Dust d2 = Dust.NewDustPerfect(Projectile.Center, DustID.BlueTorch, Scale: Main.rand.NextFloat(0.5f, 1.2f));
+            Dust d3 = Dust.NewDustPerfect(Projectile.Bottom, DustID.BlueTorch, Scale: Main.rand.NextFloat(0.5f, 1.2f));
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -48,7 +50,6 @@ namespace EldenRingItems.Projectiles.Melee
                 dust.velocity = velOffset;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.5f);
             }
-            Projectile.Kill();
         }
     }
 }

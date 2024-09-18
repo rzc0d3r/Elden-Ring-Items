@@ -13,14 +13,15 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
     public class RiversOfBlood : ModItem
     {
         public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/RiversOfBlood";
-        public int BaseDamage { get; set; } = 65;
+        public int BaseDamage { get; set; } = 60;
 
         SoundStyle IsChargedSound = new SoundStyle("EldenRingItems/Sounds/RiversOfBlood/ChargeSound");
 
+        bool Hemmorhage = false;
         bool IsCharged = false;
         const int MAX_CHARGED_ATTACKS = 3;
         int MadeChargedAttacks = 0;
-        const int MANA_FOR_CHARGE = 50;
+        const int MANA_FOR_CHARGE = 60;
 
         public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MANA_FOR_CHARGE);
@@ -40,30 +41,30 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 25, 0, 0);
             Item.rare = ItemRarityID.LightRed;
-            Item.shoot = ProjectileID.None;
+            Item.shoot = ModContent.ProjectileType<RiversOfBloodProj>();
             Item.shootSpeed = 10f;
-            Item.scale = 1.25f;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (IsCharged)
             {
-                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS)
+                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
                 {
+                    Item.UseSound = SoundID.Item1;
                     MadeChargedAttacks = 0;
                     IsCharged = false;
-                    Item.noUseGraphic = false;
-                    Item.noMelee = false;
-                    Item.shoot = ProjectileID.None;
-                    return false;
                 }
-                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
-                    Item.UseSound = SoundID.Item1;
-                MadeChargedAttacks++;
+                else
+                    MadeChargedAttacks++;
                 return true;
             }
-            return false;
+            else
+            {
+                Item.noMelee = false;
+                Item.noUseGraphic = false;
+                return false;
+            }
         }
 
         public override void HoldStyle(Player player, Rectangle heldItemFrame)
@@ -72,25 +73,50 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             {
                 if (player.CheckMana(MANA_FOR_CHARGE, true))
                 {
-                    //player.Hurt(PlayerDeathReason.ByCustomReason(""), Main.rand.Next(MIN_HP_FOR_CHARGE, MAX_HP_FOR_CHARGE+1), player.direction, armorPenetration: 1000, dodgeable: false, cooldownCounter:1);
-                    IsChargedSound.Volume = 0.6f;
+                    IsChargedSound.Volume = 0.3f;
                     SoundEngine.PlaySound(IsChargedSound);
                     IsCharged = true;
                     MadeChargedAttacks = 0;
-                    Item.shoot = ModContent.ProjectileType<RiversOfBloodProj>();
                     Item.noUseGraphic = true;
                     Item.noMelee = true;
                 }
             }
         }
+
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            int dust = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Blood, Scale: Main.rand.NextFloat(0.5f, 1.2f));
+            Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Blood, Scale: Main.rand.NextFloat(0.5f, 1.2f));
         }
+        
+        public static void DrawHemmorhageEffect(NPC npc)
+        {
+            Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.RedTorch, Alpha:180);
+            dust.noGravity = true;
+            dust.velocity = new Vector2(0, Main.rand.NextFloat(-3f, -5f)) + npc.velocity;
+            for (int i = 0; i < 4; i++)
+            {
+                Dust dust2 = Dust.NewDustDirect(npc.position + new Vector2(Main.rand.NextFloat(-10f, 10f), npc.height / 3f), npc.width, npc.height, DustID.Blood, Alpha: 50);
+                dust2.noGravity = true;
+                dust2.velocity = new Vector2(Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-1f, -3f)) + npc.velocity;
+                dust2.scale = 1.35f;
+            }
+        }
+        
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!target.HasBuff(BuffID.Venom))
-                target.AddBuff(BuffID.Venom, 60*15); // 15 seconds
+            if (Hemmorhage)
+            {
+                Hemmorhage = false;
+                Item.damage = BaseDamage;
+                SoundEngine.PlaySound(SoundID.Item152);
+                for (int i = 0; i < 5; i++)
+                    DrawHemmorhageEffect(target);
+            }
+            if (Main.rand.NextBool(6)) // 16.66 %
+            {
+                Hemmorhage = true;
+                Item.damage *= 2;
+            }
         }
     }
 
@@ -109,7 +135,10 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override void SetDefaults()
         {
-            BaseDamage += UpgradeLevel * 8;
+            if (UpgradeLevel <= 5)
+                BaseDamage += UpgradeLevel * 3;
+            else
+                BaseDamage += UpgradeLevel * 7;
             base.SetDefaults();
         }
 

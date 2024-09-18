@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Terraria.Localization;
 using EldenRingItems.Common.Players;
+using EldenRingItems.Content.Buffs.StatBuff;
 
 namespace EldenRingItems.Content.Items.Accessories
 {
@@ -24,8 +25,7 @@ namespace EldenRingItems.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            ERIPlayer eri_player = player.GetModPlayer<ERIPlayer>();
-            if (eri_player.Blessed)
+            if (player.HasBuff<BlessingBuff>())
             {
                 player.statLifeMax2 += (player.statLifeMax / 100) * LifeBonus;
                 player.statManaMax2 += ManaBonus;

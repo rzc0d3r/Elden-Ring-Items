@@ -14,7 +14,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
     public class DarkMoonGreatsword : ModItem
     {
         public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatsword";
-        public int BaseDamage { get; set; } = 100;
+        public int BaseDamage { get; set; } = 85;
 
         SoundStyle IsChargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.649");
         SoundStyle ChargedUseSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.2318");
@@ -34,8 +34,8 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.DamageType = DamageClass.Melee;
             Item.damage = BaseDamage;
             Item.knockBack = 5f;
-            Item.useTime = 20;
-            Item.useAnimation = 20;
+            Item.useTime = 27;
+            Item.useAnimation = 27;
             Item.autoReuse = true;
             Item.useTurn = true;
             Item.useStyle = ItemUseStyleID.Swing;
@@ -50,15 +50,14 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         {
             if (IsCharged)
             {
-                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS)
+                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
                 {
+                    Item.UseSound = SoundID.Item1;
                     MadeChargedAttacks = 0;
                     IsCharged = false;
-                    return false;
                 }
-                if (MadeChargedAttacks == MAX_CHARGED_ATTACKS-1)
-                    Item.UseSound = SoundID.Item1;
-                MadeChargedAttacks++;
+                else
+                    MadeChargedAttacks++;
                 return true;
             }
             return false;
@@ -73,6 +72,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                     IsChargedSound.Volume = 0.6f;
                     SoundEngine.PlaySound(IsChargedSound);
                     Item.UseSound = ChargedUseSound;
+                    MadeChargedAttacks = 0;
                     IsCharged = true;
                 }
             }
@@ -93,6 +93,12 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 spriteBatch.Draw(texture, position, null, Color.White, 0f, origin, scale, SpriteEffects.None, 0);
             }
             return false;
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (!target.HasBuff(BuffID.Frostburn))
+                target.AddBuff(BuffID.Frostburn, 60 * 15); // 15 seconds
         }
 
         //public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
@@ -136,7 +142,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override void SetDefaults()
         {
-            BaseDamage += UpgradeLevel * 10;
+            BaseDamage += UpgradeLevel * 8;
             base.SetDefaults();
         }
 

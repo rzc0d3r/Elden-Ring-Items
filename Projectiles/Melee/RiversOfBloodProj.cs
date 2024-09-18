@@ -11,14 +11,13 @@ namespace EldenRingItems.Projectiles.Melee
     public class RiversOfBloodProj : ModProjectile
     {
         SoundStyle HitSound = new SoundStyle("EldenRingItems/Sounds/RiversOfBlood/HitOrganic");
-
+        
         public override void SetStaticDefaults()
         {
-            Main.projFrames[Projectile.type] = 2;
+            Main.projFrames[Projectile.type] = 8;
         }
 
         bool Slashing = false;
-        int NumHits = 0;
 
         public override void SetDefaults()
         {
@@ -31,9 +30,10 @@ namespace EldenRingItems.Projectiles.Melee
             Projectile.penetrate = -1;
             Projectile.alpha = 0;
             Projectile.frameCounter = 0;
-            Projectile.timeLeft = 25;
+            Projectile.timeLeft = 30;
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 12;
+            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.scale = 1.15f;
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -58,7 +58,7 @@ namespace EldenRingItems.Projectiles.Melee
             if (Slashing)
             {
                 Projectile.frameCounter++;
-                if (Projectile.frameCounter % 5 == 0)
+                if (Projectile.frameCounter % 3 == 0)
                     Projectile.frame = (Projectile.frame + 1) % Main.projFrames[Type];
 
                 Vector2 playerRotatedPoint = Main.player[Projectile.owner].RotatedRelativePoint(Main.player[Projectile.owner].MountedCenter, true);
@@ -86,11 +86,9 @@ namespace EldenRingItems.Projectiles.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            HitSound.Volume = Main.rand.NextFloat(0.3f, 0.6f);
+            HitSound.Volume = Main.rand.NextFloat(0.2f, 0.45f);
             HitSound.Pitch = Main.rand.NextFloat(-0.1f, 0.1f);
             SoundEngine.PlaySound(HitSound);
-            if (!target.HasBuff(BuffID.Venom))
-                target.AddBuff(BuffID.Venom, 60 * 15);
         }
     }
 }

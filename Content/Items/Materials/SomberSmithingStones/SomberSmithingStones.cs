@@ -161,12 +161,12 @@ namespace EldenRingItems.Content.Items.Materials.SomberSmithingStones
         public override void AddRecipes()
         {
             Recipe r = CreateRecipe();
-            r.AddIngredient(ItemID.MythrilBar, 12);
+            r.AddIngredient(ItemID.TitaniumBar, 12);
             r.AddTile(TileID.MythrilAnvil);
             r.Register();
 
             Recipe r2 = CreateRecipe();
-            r2.AddIngredient(ItemID.OrichalcumBar, 12);
+            r2.AddIngredient(ItemID.AdamantiteBar, 12);
             r2.AddTile(TileID.MythrilAnvil);
             r2.Register();
         }

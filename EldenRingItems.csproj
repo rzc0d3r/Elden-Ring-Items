@@ -9,7 +9,10 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Content\Buffs\BlessingBuff.png" />
+	  <None Remove="Content\Buffs\StatDebuff\BlackFlameDebuff.png" />
 	  <None Remove="Content\Items\Accessories\RadahnsGreatRune.png" />
+	  <None Remove="Content\Items\Consumables\BlackFlameSpell.png" />
+	  <None Remove="Content\Items\Consumables\GreatKatana2.png" />
 	  <None Remove="Content\Items\Consumables\RuneArc.png" />
 	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberAncientDragonSmithingStone.png" />
 	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones1.png" />
@@ -23,7 +26,12 @@
 	  <None Remove="Content\Items\Materials\SomberSmithingStones\SomberSmithingStones9.png" />
 	  <None Remove="Content\Items\Weapons\Melee\BlasphemousBlade.png" />
 	  <None Remove="Localization\ru-RU_Mods.EldenRingItems.hjson" />
+	  <None Remove="MainMenu\Logo.png" />
+	  <None Remove="MainMenu\MenuBackground.png" />
 	  <None Remove="Projectiles\Melee\BloodSlash.png" />
+	  <None Remove="Projectiles\Melee\MoonveilProj.png" />
+	  <None Remove="Projectiles\Melee\SupremeCatastropheSlash.png" />
+	  <None Remove="Projectiles\Melee\SupremeCatastropheSlashAlt.png" />
 	</ItemGroup>
 
 	<!-- References -->

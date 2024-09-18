@@ -7,20 +7,29 @@ Items: {
 			'''
 			Increases max HP by {0}%
 			Increases maximum mana by {1}
-			[c/9a1b00:Gives power only to the worthy...]
+			[c/757575:A Great Rune of the shardbearer Radahn.]
+			[c/757575:Radahn was amongst the children of Rennala and Radagon,]
+			[c/757575:who became demigod stepchildren after Radagon's union with Queen Marika.]
+			[c/757575:The Great Rune burns, to resist the encroachment of the scarlet rot.]
 			'''
 	}
 
 	RuneArc: {
-		DisplayName: Rune arc
-		Tooltip: Gives you a blessing!
+		DisplayName: Rune Arc
+		Tooltip:
+			'''
+			[c/757575:A shard of the shattered Elden Ring.]
+			[c/757575:Grants the blessing of an equipped Great Rune upon use.]
+			[c/757575:The lower arc of the Elden Ring is held to be the basin in which its blessings pool.]
+			[c/757575:Perhaps this shard originates from that very arc.]
+			'''
 	}
 
 	BlasphemousBlade: {
 		DisplayName: Blasphemous blade{0}
 		Tooltip:
 			'''
-			When holding it in your hand, press [c/939393:right mouse button] to charge the sword
+			When holding it in your hand, hold [c/939393:right mouse button] to charge the sword
 			When the sword becomes [c/0078bd:charged] it will emit a special sound
 			Attacking from the [c/0078bd:charged state] releases super-fast blast waves that cast [c/c90000:Hellfire]
 			on the target and replenish between [c/980000:{0}] and [c/980000:{1}] of your health
@@ -144,6 +153,7 @@ Items: {
 			Attacking from [c/0078bd:charged state] releases super-fast waves
 			The sword will lose its charge (after dealing [c/980000:{1}] [c/0078bd:charged] blows)
 			Attack from [c/939393:normal state] makes normal sword strikes
+			All sword attacks impose a [c/a1fffd:Frostburn] debuff on the target
 			[c/757575:A Moon Greatsword, bestowed by a Carian queen upon her spouse to honor long-standing tradition.]
 			[c/757575:One of the legendary armaments.]
 			[c/757575:Ranni's sigil is a full moon, cold and leaden, and this sword is but a beam of its light.]
@@ -151,17 +161,67 @@ Items: {
 	}
 
 	RiversOfBlood: {
-		DisplayName: Rivers Of Blood{0}
+		DisplayName: Rivers of Blood{0}
 		Tooltip:
 			'''
 			When holding it in your hand, press [c/939393:right mouse button] to charge the katana (spends [c/4110a3:{0}] mana)
 			When the katana becomes [c/0078bd:charged] it will make a special sound
-			Attacking from the [c/0078bd:charged state] makes super-fast piercing blows that inflict debuff [c/4110a3:Venom] on the target
+			Attacking from the [c/0078bd:charged state] makes super-fast piercing blows
 			Attacking from [c/939393:normal state] deals normal katana strikes
+			During normal strikes, the [c/c90000:16.6%] chance of [c/c90000:Hemmorhage] mode can be activated
+			When this mode is activated, the katana deals twice as much damage
 			[c/757575:Weapon of Okina, swordsman from the Land of Reeds.]
 			[c/757575:A cursed weapon that has felled countless men.]
 			[c/757575:When Mohg, the Lord of Blood, first felt Okina's sword, and madness,]
 			[c/757575:upon his flesh, he had a proposal, to offer Okina the life of a demon, whose thirst would never go unsated.]
+			'''
+	}
+
+	GreatKatana: {
+		DisplayName: Great Katana{0}
+		Tooltip:
+			'''
+			Chance of a [c/ad0d00:supercritical hit] - [c/ad0d00:{0}%]
+			[c/ad0d00:Supercritical hit] increases base damage [c/ad0d00:{1}] times, and it also deals guaranteed critical damage
+			[c/757575:Large katana with a long, heavy blade.]
+			[c/757575:A weapon unique to warriors of the Land of Reeds.]
+			[c/757575:Designed for aggression, this armament requires the wielder to throw their entire body into swinging it.]
+			'''
+	}
+
+	SwordOfNightAndFlame: {
+		DisplayName: Sword of Night and Flame{0}
+		Tooltip:
+			'''
+			Inflicts 2 debuffs on the target in random order: [c/d34e02:On Fire!] and [c/a1fffd:Ice Burn]
+			[c/757575:Storied sword and treasure of Caria Manor. One of the legendary armaments.]
+			[c/757575:Astrologers, who preceded the sorcerers, established themselves in mountaintops that]
+			[c/757575:nearly touched the sky, and considered the Fire Giants their neighbors.]
+			'''
+	}
+
+	Moonveil: {
+		DisplayName: Moonveil{0}
+		Tooltip:
+			'''
+			When holding it in your hand, press [c/939393:right mouse button] to charge the katana (spends [c/4110a3:{0}] mana)
+			When the katana becomes [c/0078bd:charged] it will make a special sound
+			Attacking from the [c/0078bd:charged state] deals 3 times more damage and also
+			unleashes a huge, super-fast arc that pierces through everything
+			Attack from [c/939393:normal state] deals normal katana strikes
+			[c/757575:Katana forged of glintstone.]
+			[c/757575:Masterpiece of a Sellian swordsmith. ]
+			[c/757575:Light enwreathes the blade when sheathed, explaining its Moonveil moniker.]
+			'''
+	}
+
+	BlackFlameSpell: {
+		DisplayName: Black Flame Spell
+		Tooltip:
+			'''
+			Melee attacks set enemies on black flame
+			[c/757575:Black flame is weighty.]
+			[c/757575:After dealing damage it continues to sap foes' HP for a very short time.]
 			'''
 	}
 }
@@ -171,6 +231,16 @@ Buffs: {
 		DisplayName: Blessing
 		Description: You are blessed, the runes give you strength!
 	}
+
+	WeaponImbueBlackFlame: {
+		DisplayName: Weapon Imbue: Black Flame
+		Description: Melee attacks set enemies on black flame
+	}
+
+	BlackFlameDebuff: {
+		DisplayName: Black Flame
+		Description: Empty
+	}
 }
 
 Projectiles: {
@@ -178,4 +248,5 @@ Projectiles: {
 	GiantCrusherProj.DisplayName: Giant Crusher Proj
 	DarkMoonGreatswordProj.DisplayName: Dark Moon Greatsword Proj
 	RiversOfBloodProj.DisplayName: Rivers Of Blood Proj
+	MoonveilProj.DisplayName: Moonveil Proj
 }

@@ -99,7 +99,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 if (HurtCount < 7)
                 {
                     HoldingCount++;
-                    if (HoldingCount == 25) // every 25 mouseRight-holding events processed
+                    if (HoldingCount == 12) // every 12 mouseRight-holding events processed
                     {
                         HoldingCount = 0;
                         HurtCount++;
@@ -136,7 +136,10 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override void SetDefaults()
         {
-            BaseDamage += UpgradeLevel * 10;
+            if (UpgradeLevel <= 5)
+                BaseDamage += UpgradeLevel * 3;
+            else
+                BaseDamage += UpgradeLevel * 10;
             base.SetDefaults();
         }
 

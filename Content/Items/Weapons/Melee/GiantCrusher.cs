@@ -21,8 +21,8 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.damage = BaseDamage;
             Item.knockBack = 9f;
-            Item.useTime = 30;
-            Item.useAnimation = 30;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.useTurn = true;

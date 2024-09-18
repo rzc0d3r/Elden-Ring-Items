@@ -31,6 +31,11 @@ namespace EldenRingItems.Common.NPCLootDrop
                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RiversOfBlood>(), 12));
             if (npc.type == NPCID.BloodNautilus)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RiversOfBlood>(), 4));
+            // Moonveil
+            if (npc.type == NPCID.BlueArmoredBonesSword)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Moonveil>(), 12));
+            if (npc.type == NPCID.WyvernHead)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Moonveil>(), 25));
         }
     }
 }
