@@ -40,7 +40,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 25, 0, 0);
             Item.rare = ItemRarityID.LightPurple;
-            Item.shoot = ModContent.ProjectileType<MoonveilProj>();
+            Item.shoot = ModContent.ProjectileType<MoonveilSlash>();
             Item.shootSpeed = 12f;
         }
 
@@ -85,7 +85,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.HasBuff(BuffID.Frostburn))
-                target.AddBuff(BuffID.Frostburn, 60 *15); // 15 seconds
+                target.AddBuff(BuffID.Frostburn, 60 * 15); // 15 seconds
         }
     }
 

@@ -29,7 +29,7 @@
 	  <None Remove="MainMenu\Logo.png" />
 	  <None Remove="MainMenu\MenuBackground.png" />
 	  <None Remove="Projectiles\Melee\BloodSlash.png" />
-	  <None Remove="Projectiles\Melee\MoonveilProj.png" />
+	  <None Remove="Projectiles\Melee\DarkMoonGreatsword\DarkMoonGreatswordCharged.png" />
 	  <None Remove="Projectiles\Melee\SupremeCatastropheSlash.png" />
 	  <None Remove="Projectiles\Melee\SupremeCatastropheSlashAlt.png" />
 	</ItemGroup>

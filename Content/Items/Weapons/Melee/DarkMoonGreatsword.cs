@@ -3,11 +3,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
-using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
-using EldenRingItems.Projectiles.Melee;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
+using EldenRingItems.Projectiles.Melee.DarkMoonGreatsword;
+using EldenRingItems.Common.Players;
+using EldenRingItems.Projectiles.Melee;
 
 namespace EldenRingItems.Content.Items.Weapons.Melee
 {
@@ -16,13 +17,11 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatsword";
         public int BaseDamage { get; set; } = 85;
 
-        SoundStyle IsChargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.649");
         SoundStyle ChargedUseSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.2318");
-      
-        bool IsCharged = false;
-        const int MAX_CHARGED_ATTACKS = 8;
+       
+        const int MAX_CHARGED_ATTACKS = 10;
         int MadeChargedAttacks = 0;
-        const int MANA_FOR_CHARGE = 60;
+        const int MANA_FOR_CHARGE = 120;
 
         public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MANA_FOR_CHARGE, MAX_CHARGED_ATTACKS);
@@ -42,19 +41,19 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 35, 0, 0);
             Item.rare = ItemRarityID.Cyan;
-            Item.shoot = ModContent.ProjectileType<DarkMoonGreatswordProj>();
+            Item.shoot = ModContent.ProjectileType<MoonveilSlash>();
             Item.shootSpeed = 12f;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (IsCharged)
+            if (player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged && player.altFunctionUse != 2)
             {
                 if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
                 {
                     Item.UseSound = SoundID.Item1;
                     MadeChargedAttacks = 0;
-                    IsCharged = false;
+                    player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged = false;
                 }
                 else
                     MadeChargedAttacks++;
@@ -63,34 +62,27 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             return false;
         }
 
-        public override void HoldStyle(Player player, Rectangle heldItemFrame)
+        public override bool AltFunctionUse(Player player) => true;
+
+        public override bool CanUseItem(Player player)
         {
-            if (Main.mouseRight && !IsCharged)
+            if (player.altFunctionUse == 2)
             {
-                if (player.CheckMana(MANA_FOR_CHARGE, true))
+                if (!player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged && !player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging)
                 {
-                    IsChargedSound.Volume = 0.6f;
-                    SoundEngine.PlaySound(IsChargedSound);
-                    Item.UseSound = ChargedUseSound;
-                    MadeChargedAttacks = 0;
-                    IsCharged = true;
+                    if (player.CheckMana(MANA_FOR_CHARGE, true))
+                    {
+                        player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging = true;
+                        Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem), player.MountedCenter.X, player.MountedCenter.Y, 0, -30, ModContent.ProjectileType<DarkMoonGreatswordCharging>(), 0, 0, player.whoAmI, 0f);
+                        Item.UseSound = ChargedUseSound;
+                        MadeChargedAttacks = 0;
+                    }
                 }
-            }
-        }
-
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frameI, Color drawColor, Color itemColor, Vector2 origin, float scale)
-        {
-            Texture2D texture;
-
-            if (!IsCharged)
-            {
-                texture = ModContent.Request<Texture2D>(Texture).Value;
-                spriteBatch.Draw(texture, position, null, Color.White, 0f, origin, scale, SpriteEffects.None, 0);
             }
             else
             {
-                texture = ModContent.Request<Texture2D>("EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatswordCharged").Value;
-                spriteBatch.Draw(texture, position, null, Color.White, 0f, origin, scale, SpriteEffects.None, 0);
+                if (!player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging && player.altFunctionUse != 2)
+                    return true;
             }
             return false;
         }
@@ -100,31 +92,6 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             if (!target.HasBuff(BuffID.Frostburn))
                 target.AddBuff(BuffID.Frostburn, 60 * 15); // 15 seconds
         }
-
-        //public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
-        //{
-        //    Texture2D texture;
-
-        //    if (!IsCharged)
-        //    {
-        //        texture = ModContent.Request<Texture2D>(Texture).Value;
-        //        spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
-        //    }
-        //    else
-        //    {
-        //        texture = ModContent.Request<Texture2D>("EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatswordCharged").Value;
-        //        spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
-        //    }
-        //    return false;
-        //}
-
-        //public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        //{
-        //    if (!IsCharged)
-        //        return;
-        //    Texture2D texture = ModContent.Request<Texture2D>("EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatswordCharged").Value;
-        //    spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
-        //}
     }
 
     #region Upgrade

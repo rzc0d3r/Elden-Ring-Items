@@ -206,7 +206,7 @@ Items: {
 			'''
 			При взятии в руку, нажмите [c/939393:правую кнопку мыши] для зарядки меча (тратит [c/4110a3:{0}] маны)
 			Когда меч станет [c/0078bd:заряжённым] он издаст специальный звук
-			Атака из [c/0078bd:заряжённого состояния] наносит в 4 раза больше урона, а также
+			Атака из [c/0078bd:заряжённого состояния] наносит в 3 раза больше урона, а также
 			выпускает огромную сверхбыструю дугу, которая пробивает всё
 			Атака из [c/939393:обычного состояния] наносит обычные удары катаной
 			[c/757575:Катана, выкованная из блестящего камня.]
@@ -223,6 +223,11 @@ Items: {
 			[c/757575:Чёрному пламени присуща особая плотность.]
 			[c/757575:Опалив врагов, оно ещё пару мгновений будет поглощать их здоровье.]
 			'''
+	}
+
+	CarianDarkMoon: {
+		// DisplayName: Carian Dark Moon
+		// Tooltip: ""
 	}
 }
 
@@ -249,4 +254,14 @@ Projectiles: {
 	// DarkMoonGreatswordProj.DisplayName: Dark Moon Greatsword Proj
 	// RiversOfBloodProj.DisplayName: Rivers Of Blood Proj
 	// MoonveilProj.DisplayName: Moonveil Proj
+	// CarianSwingE2.DisplayName: Carian Swing E2
+	// DarkmoonSpawn.DisplayName: Darkmoon Spawn
+	// DarkmoonSpawnEmpowered.DisplayName: Darkmoon Spawn Empowered
+	// DarkmoonSword.DisplayName: Darkmoon Sword
+	// DarkmoonSwordEmpowered.DisplayName: Darkmoon Sword Empowered
+	// MoonlightAttack.DisplayName: Moonlight Attack
+	// DarkMoonGreatswordCharged.DisplayName: Dark Moon Greatsword Charged
+	// DarkMoonGreatswordCharging.DisplayName: Dark Moon Greatsword Charging
+	// DarkMoonGreatswordSlash.DisplayName: Dark Moon Greatsword Slash
+	// MoonveilSlash.DisplayName: Moonveil Slash
 }

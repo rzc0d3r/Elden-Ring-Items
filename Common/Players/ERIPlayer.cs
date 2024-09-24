@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.UI;
 using Terraria.ModLoader;
 using Terraria.ID;
 using EldenRingItems.Content.Buffs.StatDebuff;
@@ -12,6 +11,9 @@ namespace EldenRingItems.Common.Players
         public bool Blessed = false;
         public bool WeaponImbueBlackFlame = false;
 
+        public bool DarkMoonGreatswordIsCharged = false;
+        public bool DarkMoonGreatswordCharging = false;
+
         public override void ResetEffects()
         {
              WeaponImbueBlackFlame = false;
@@ -20,6 +22,8 @@ namespace EldenRingItems.Common.Players
         public override void OnRespawn()
         {
             Blessed = false;
+            DarkMoonGreatswordIsCharged = false;
+            DarkMoonGreatswordCharging = false;
         }
 
         public override void MeleeEffects(Item item, Rectangle hitbox)
