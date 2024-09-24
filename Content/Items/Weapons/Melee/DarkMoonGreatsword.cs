@@ -41,7 +41,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 35, 0, 0);
             Item.rare = ItemRarityID.Cyan;
-            Item.shoot = ModContent.ProjectileType<MoonveilSlash>();
+            Item.shoot = ModContent.ProjectileType<DarkMoonGreatswordSlash>();
             Item.shootSpeed = 12f;
         }
 
