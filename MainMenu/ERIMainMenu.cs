@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
+
 using Terraria;
 using Terraria.ModLoader;
+
+using ReLogic.Content;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EldenRingItems.MainMenu
 {

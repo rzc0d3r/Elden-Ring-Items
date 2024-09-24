@@ -1,8 +1,8 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria;
 using Terraria.Localization;
-using EldenRingItems.Common.Players;
+
 using EldenRingItems.Content.Buffs.StatBuff;
 
 namespace EldenRingItems.Content.Items.Accessories

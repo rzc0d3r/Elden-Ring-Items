@@ -1,12 +1,13 @@
 ﻿using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
-using EldenRingItems.Projectiles.Melee;
 using Terraria.Audio;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
-using System;
+using Terraria.ModLoader;
 using Terraria.Localization;
+using Terraria.DataStructures;
+
+using Microsoft.Xna.Framework;
+
+using EldenRingItems.Projectiles.Melee;
 using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
 
 namespace EldenRingItems.Content.Items.Weapons.Melee

@@ -2,8 +2,10 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
-using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
+
 using Microsoft.Xna.Framework;
+
+using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
 
 namespace EldenRingItems.Content.Items.Weapons.Melee
 {

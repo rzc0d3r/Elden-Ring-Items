@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Audio;
+﻿using Terraria;
 using Terraria.ID;
+using Terraria.Audio;
 using Terraria.ModLoader;
+
+using Microsoft.Xna.Framework;
 
 namespace EldenRingItems.Projectiles.Melee
 {

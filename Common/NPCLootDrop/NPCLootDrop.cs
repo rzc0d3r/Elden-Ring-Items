@@ -1,10 +1,10 @@
-﻿using Terraria.GameContent.ItemDropRules;
-using Terraria.ModLoader;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.GameContent.ItemDropRules;
 
-using EldenRingItems.Content.Items.Weapons.Melee;
 using EldenRingItems.Content.Items.Consumables;
+using EldenRingItems.Content.Items.Weapons.Melee;
 
 namespace EldenRingItems.Common.NPCLootDrop
 {
@@ -25,7 +25,7 @@ namespace EldenRingItems.Common.NPCLootDrop
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GiantCrusher>(), 1));
             // Dark Moon Greatsword
             if (npc.type == NPCID.CultistBoss)
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DarkMoonGreatsword>(), 1));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DarkMoonGreatsword0>(), 1));
             // Rivers Of Blood
             if (npc.type == NPCID.BloodEelHead)
                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RiversOfBlood>(), 12));

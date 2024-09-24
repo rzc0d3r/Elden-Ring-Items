@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+
 using EldenRingItems.Content.Buffs.StatDebuff;
 
 namespace ExampleMod.Common.GlobalNPCs

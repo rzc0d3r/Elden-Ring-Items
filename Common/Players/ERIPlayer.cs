@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
+﻿using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
+
+using Microsoft.Xna.Framework;
+
 using EldenRingItems.Content.Buffs.StatDebuff;
 
 namespace EldenRingItems.Common.Players
@@ -30,11 +32,12 @@ namespace EldenRingItems.Common.Players
         {
             if (WeaponImbueBlackFlame)
             {
-                if (item.DamageType.CountsAsClass<MeleeDamageClass>() && !item.noMelee && !item.noUseGraphic)
+                if (item.DamageType.CountsAsClass<MeleeDamageClass>() && !item.noMelee && !item.noUseGraphic) {
                     if (Main.rand.NextBool(2))
                     {
                         Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Wraith, Scale: Main.rand.NextFloat(0.5f, 0.8f));
                     }
+                }
             }
         }
 

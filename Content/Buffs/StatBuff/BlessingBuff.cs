@@ -1,7 +1,8 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
-using EldenRingItems.Common.Players;
 using Terraria.ID;
+using Terraria.ModLoader;
+
+using EldenRingItems.Common.Players;
 
 namespace EldenRingItems.Content.Buffs.StatBuff
 {

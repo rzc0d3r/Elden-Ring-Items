@@ -1,7 +1,7 @@
-﻿using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
+﻿using Terraria;
+using Terraria.ID;
 using Terraria.Audio;
+using Terraria.ModLoader;
 
 using EldenRingItems.Common.Players;
 using EldenRingItems.Content.Buffs.StatBuff;

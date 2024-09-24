@@ -1,24 +1,27 @@
 ﻿using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Audio;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.DataStructures;
+
 using Microsoft.Xna.Framework;
-using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
+using Microsoft.Xna.Framework.Graphics;
+
 using EldenRingItems.Projectiles.Melee.DarkMoonGreatsword;
-using EldenRingItems.Common.Players;
-using EldenRingItems.Projectiles.Melee;
+using EldenRingItems.Content.Items.Materials.SomberSmithingStones;
 
 namespace EldenRingItems.Content.Items.Weapons.Melee
 {
-    public class DarkMoonGreatsword : ModItem
+    public class DarkMoonGreatsword0 : ModItem
     {
         public override string Texture => "EldenRingItems/Content/Items/Weapons/Melee/DarkMoonGreatsword";
         public int BaseDamage { get; set; } = 85;
 
         SoundStyle ChargedUseSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.2318");
-       
+
+        public bool Charging { get; set; } = false;
+        public bool IsCharged { get; set; } = false;
         const int MAX_CHARGED_ATTACKS = 10;
         int MadeChargedAttacks = 0;
         const int MANA_FOR_CHARGE = 100;
@@ -47,13 +50,12 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged && player.altFunctionUse != 2)
+            if (IsCharged && player.altFunctionUse != 2)
             {
                 if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
                 {
-                    Item.UseSound = SoundID.Item1;
-                    MadeChargedAttacks = 0;
-                    player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged = false;
+                    Reset();
+                    IsCharged = false;
                 }
                 else
                     MadeChargedAttacks++;
@@ -64,26 +66,52 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override bool AltFunctionUse(Player player) => true;
 
+        void Reset(string addtext="")
+        {
+            //Main.NewText(addtext+ "Resetting an interrupted charge DarkMoonGreatsword");
+            Charging = false;
+            Item.UseSound = SoundID.Item1;
+            MadeChargedAttacks = 0;
+        }
+
+        public override void UpdateInventory(Player player)
+        {
+            if (player.HeldItem.type != Type && !IsCharged && Charging)
+                Reset();
+        }
+
+        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        {
+            base.PostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
+            if (!IsCharged && Charging && Main.LocalPlayer.HeldItem.type != Type)
+                Reset();
+        }
+
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+            if (!IsCharged && Charging && Main.LocalPlayer.HeldItem.type != Type)
+                Reset();
+        }
+
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2)
+            if (player.altFunctionUse == 2 && !IsCharged)
             {
-                if (!player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordIsCharged && !player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging)
+                if (!Charging)
                 {
                     if (player.CheckMana(MANA_FOR_CHARGE, true))
                     {
-                        player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging = true;
-                        Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem), player.MountedCenter.X, player.MountedCenter.Y, 0, -30, ModContent.ProjectileType<DarkMoonGreatswordCharging>(), 0, 0, player.whoAmI, 0f);
+                        Charging = true;
+                        if (Main.myPlayer == player.whoAmI)
+                            Projectile.NewProjectile(player.GetSource_ItemUse(player.HeldItem), player.MountedCenter.X, player.MountedCenter.Y, 0, -30, ModContent.ProjectileType<DarkMoonGreatswordCharging>(), 0, 0, player.whoAmI, 0f);
                         Item.UseSound = ChargedUseSound;
                         MadeChargedAttacks = 0;
                     }
                 }
             }
-            else
-            {
-                if (!player.GetModPlayer<ERIPlayer>().DarkMoonGreatswordCharging && player.altFunctionUse != 2)
-                    return true;
-            }
+            else if (!Charging && player.altFunctionUse != 2)
+                return true;
             return false;
         }
 
@@ -95,12 +123,12 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
     }
 
     #region Upgrade
-    public abstract class UpgradedDarkMoonGreatsword : DarkMoonGreatsword
+    public abstract class UpgradedDarkMoonGreatsword : DarkMoonGreatsword0
     {
         public int UpgradeLevel { get; set; }
         public Recipe recipe { get; set; }
-        public override LocalizedText Tooltip => ModContent.GetModItem(ModContent.ItemType<DarkMoonGreatsword>()).Tooltip;
-        public override LocalizedText DisplayName => ModContent.GetModItem(ModContent.ItemType<DarkMoonGreatsword>()).DisplayName.WithFormatArgs($" +{UpgradeLevel}");
+        public override LocalizedText Tooltip => ModContent.GetModItem(ModContent.ItemType<DarkMoonGreatsword0>()).Tooltip;
+        public override LocalizedText DisplayName => ModContent.GetModItem(ModContent.ItemType<DarkMoonGreatsword0>()).DisplayName.WithFormatArgs($" +{UpgradeLevel}");
 
         protected UpgradedDarkMoonGreatsword(int upgradeLevel)
         {
@@ -127,7 +155,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         public override void AddRecipes()
         {
             base.AddRecipes();
-            recipe.AddIngredient(ModContent.ItemType<DarkMoonGreatsword>());
+            recipe.AddIngredient(ModContent.ItemType<DarkMoonGreatsword0>());
             recipe.Register();
         }
     }

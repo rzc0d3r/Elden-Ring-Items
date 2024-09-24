@@ -1,9 +1,8 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 using Terraria.ID;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.DataStructures;
+using Terraria.ModLoader;
+
+using Microsoft.Xna.Framework;
 
 namespace EldenRingItems.Content.Buffs.StatDebuff
 {
