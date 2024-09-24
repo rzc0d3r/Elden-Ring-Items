@@ -21,7 +21,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
        
         const int MAX_CHARGED_ATTACKS = 10;
         int MadeChargedAttacks = 0;
-        const int MANA_FOR_CHARGE = 120;
+        const int MANA_FOR_CHARGE = 100;
 
         public override LocalizedText DisplayName => base.DisplayName.WithFormatArgs("");
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MANA_FOR_CHARGE, MAX_CHARGED_ATTACKS);
