@@ -224,11 +224,6 @@ Items: {
 			[c/757575:Опалив врагов, оно ещё пару мгновений будет поглощать их здоровье.]
 			'''
 	}
-
-	CarianDarkMoon: {
-		// DisplayName: Carian Dark Moon
-		// Tooltip: ""
-	}
 }
 
 Buffs: {
@@ -254,12 +249,6 @@ Projectiles: {
 	// DarkMoonGreatswordProj.DisplayName: Dark Moon Greatsword Proj
 	// RiversOfBloodProj.DisplayName: Rivers Of Blood Proj
 	// MoonveilProj.DisplayName: Moonveil Proj
-	// CarianSwingE2.DisplayName: Carian Swing E2
-	// DarkmoonSpawn.DisplayName: Darkmoon Spawn
-	// DarkmoonSpawnEmpowered.DisplayName: Darkmoon Spawn Empowered
-	// DarkmoonSword.DisplayName: Darkmoon Sword
-	// DarkmoonSwordEmpowered.DisplayName: Darkmoon Sword Empowered
-	// MoonlightAttack.DisplayName: Moonlight Attack
 	// DarkMoonGreatswordCharged.DisplayName: Dark Moon Greatsword Charged
 	// DarkMoonGreatswordCharging.DisplayName: Dark Moon Greatsword Charging
 	// DarkMoonGreatswordSlash.DisplayName: Dark Moon Greatsword Slash
