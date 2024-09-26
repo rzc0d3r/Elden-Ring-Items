@@ -12,7 +12,7 @@ namespace EldenRingItems.Common.Players
     {
         public bool Blessed = false;
         public bool WeaponImbueBlackFlame = false;
-        
+
         public override void ResetEffects()
         {
              WeaponImbueBlackFlame = false;

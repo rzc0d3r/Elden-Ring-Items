@@ -29,8 +29,6 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
         int HurtCount = 0;
 
         public int BaseDamage { get; set; } = 55;
-        float BaseKnockBack = 5f;
-        float BaseShootSpeed = 14f;
 
         SoundStyle BladeIsChargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.832");
         SoundStyle BladeIsDichargedSound = new SoundStyle("EldenRingItems/Sounds/cs_c2010.833");
@@ -43,7 +41,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.height = 92;
             Item.DamageType = DamageClass.Melee;
             Item.damage = BaseDamage;
-            Item.knockBack = BaseKnockBack;
+            Item.knockBack = 5f;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.autoReuse = true;
@@ -54,7 +52,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             Item.rare = ItemRarityID.LightRed;
 
             Item.shoot = ModContent.ProjectileType<BloodSlash>();
-            Item.shootSpeed = BaseShootSpeed;
+            Item.shootSpeed = 14f;
         }
 
         void ResetBladeBonus()
@@ -64,11 +62,9 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
             MadeChargedAttacks = 0;
             BladeIsCharged = false;
             Item.shoot = ModContent.ProjectileType<BloodSlash>();
-            Item.damage = BaseDamage;
-            Item.knockBack = BaseKnockBack;
-            Item.shootSpeed = BaseShootSpeed;
-            Item.useTime = 30;
-            Item.useAnimation = 30;
+            Item.shootSpeed -= 6;
+            Item.useTime += 14;
+            Item.useAnimation += 14;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -113,10 +109,9 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                     SoundEngine.PlaySound(BladeIsChargedSound); 
                     BladeIsCharged = true;
                     Item.shoot = ProjectileID.InfernoFriendlyBlast;
-                    Item.shootSpeed = 20f;
-                    Item.knockBack = 9f;
-                    Item.useTime = 16;
-                    Item.useAnimation = 16;
+                    Item.shootSpeed += 6f;
+                    Item.useTime -= 14;
+                    Item.useAnimation -= 14;
                 }
             }
         }

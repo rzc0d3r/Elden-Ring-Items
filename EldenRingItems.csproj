@@ -10,6 +10,8 @@
 	<ItemGroup>
 	  <None Remove="Content\Buffs\BlessingBuff.png" />
 	  <None Remove="Content\Buffs\StatDebuff\BlackFlameDebuff.png" />
+	  <None Remove="Content\Items\Accessories\CrimsonSeedTalisman.png" />
+	  <None Remove="Content\Items\Accessories\CrimsonSeedTalisman1.png" />
 	  <None Remove="Content\Items\Accessories\RadahnsGreatRune.png" />
 	  <None Remove="Content\Items\Consumables\BlackFlameSpell.png" />
 	  <None Remove="Content\Items\Consumables\GreatKatana2.png" />

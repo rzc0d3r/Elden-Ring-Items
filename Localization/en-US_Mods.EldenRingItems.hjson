@@ -206,7 +206,7 @@ Items: {
 			'''
 			When holding it in your hand, press [c/939393:right mouse button] to charge the katana (spends [c/4110a3:{0}] mana)
 			When the katana becomes [c/0078bd:charged] it will make a special sound
-			Attacking from the [c/0078bd:charged state] deals 3 times more damage and also
+			Attacking from the [c/0078bd:charged state] deals [c/980000:3] times more damage and also
 			unleashes a huge, super-fast arc that pierces through everything
 			Attack from [c/939393:normal state] deals normal katana strikes
 			[c/757575:Katana forged of glintstone.]

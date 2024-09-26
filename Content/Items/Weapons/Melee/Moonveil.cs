@@ -48,11 +48,8 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Item.damage = BaseDamage;
             if (IsCharged)
             {
-                if (MadeChargedAttacks == 0)
-                    Item.damage = BaseDamage * 3;
                 if (MadeChargedAttacks == MAX_CHARGED_ATTACKS - 1)
                 {
                     Item.UseSound = SoundID.Item1;
@@ -64,6 +61,12 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 return true;
             }
             return false;
+        }
+
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
+        {
+            if (IsCharged)
+                damage *= 3;
         }
 
         public override void HoldStyle(Player player, Rectangle heldItemFrame)
@@ -78,6 +81,7 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
                 }
             }
         }
+
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
             if (Main.rand.NextBool(3))

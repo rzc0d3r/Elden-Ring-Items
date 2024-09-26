@@ -68,7 +68,6 @@ namespace EldenRingItems.Content.Items.Weapons.Melee
 
         void Reset(string addtext="")
         {
-            //Main.NewText(addtext+ "Resetting an interrupted charge DarkMoonGreatsword");
             Charging = false;
             Item.UseSound = SoundID.Item1;
             MadeChargedAttacks = 0;
