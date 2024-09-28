@@ -205,7 +205,7 @@ namespace EldenRingItems.Content.Items.Materials.SomberSmithingStones
         public override void AddRecipes()
         {
             Recipe r = CreateRecipe();
-            r.AddIngredient(ItemID.ChlorophyteBar, 15);
+            r.AddIngredient(ItemID.ChlorophyteBar, 12);
             r.AddIngredient(ItemID.SoulofFright, 5);
             r.AddIngredient(ItemID.SoulofMight, 5);
             r.AddIngredient(ItemID.SoulofSight, 5);
@@ -227,8 +227,8 @@ namespace EldenRingItems.Content.Items.Materials.SomberSmithingStones
         public override void AddRecipes()
         {
             Recipe r = CreateRecipe();
-            r.AddIngredient(ItemID.ShroomiteBar, 15);
-            r.AddIngredient(ItemID.SpectreBar, 15);
+            r.AddIngredient(ItemID.ShroomiteBar, 12);
+            r.AddIngredient(ItemID.SpectreBar, 12);
             r.AddIngredient(ItemID.SoulofFright, 5);
             r.AddIngredient(ItemID.SoulofMight, 5);
             r.AddIngredient(ItemID.SoulofSight, 5);

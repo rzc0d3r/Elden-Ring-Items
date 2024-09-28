@@ -9,10 +9,10 @@ namespace EldenRingItems.Content.Items.Accessories
 {
     public class RadahnsGreatRune : ModItem
     {
-        public static readonly int LifeBonus = 15;
-        public static readonly int ManaBonus = 60;
+        public float LifeBonusMultiplier = 0.15f;
+        public int ManaBonus = 60;
 
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(LifeBonus, ManaBonus);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs((int)(LifeBonusMultiplier * 100), ManaBonus);
 
         public override void SetDefaults()
         {
@@ -27,7 +27,7 @@ namespace EldenRingItems.Content.Items.Accessories
         {
             if (player.HasBuff<BlessingBuff>())
             {
-                player.statLifeMax2 += (player.statLifeMax / 100) * LifeBonus;
+                player.statLifeMax2 += (int)(player.statLifeMax*LifeBonusMultiplier);
                 player.statManaMax2 += ManaBonus;
             }
         }

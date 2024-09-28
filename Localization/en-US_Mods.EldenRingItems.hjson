@@ -224,6 +224,68 @@ Items: {
 			[c/757575:After dealing damage it continues to sap foes' HP for a very short time.]
 			'''
 	}
+
+	CrimsonSeedTalisman: {
+		DisplayName: Crimson Seed Talisman{0}
+		Tooltip:
+			'''
+			Healing Potions are {0}% more effective
+			[c/757575:A crimson-colored talisman patterned after an Erdtree seed.]
+			[c/757575:The Erdtree was once perfect and eternal, and thus was it believed that Erdtree seeds could not exist.]
+			'''
+	}
+
+	CeruleanSeedTalisman: {
+		DisplayName: Cerulean Seed Talisman{0}
+		Tooltip:
+			'''
+			Mana Potions are {0}% more effective
+			[c/757575:A cerulean-colored talisman patterned after an Erdtree seed.]
+			[c/757575:The Erdtree was once perfect and eternal, and thus was it believed that Erdtree seeds could not exist.]
+			'''
+	}
+
+	CrimsonCeruleanSeedTalisman: {
+		DisplayName: Crimson and Cerulean Seed Talisman{0}
+		Tooltip:
+			'''
+			Healing Potions are {0}% more effective
+			Mana Potions are {1}% more effective
+			'''
+	}
+
+	CrimsonAmberMedallion: {
+		DisplayName: Crimson Amber Medallion{0}
+		Tooltip:
+			'''
+			Increases max HP by {0}%
+			[c/757575:A medallion with crimson amber inlaid.]
+			[c/757575:The Erdtree's old sap becomes amber, treasured as the most precious of jewels in the age of Godfrey, the first Elden Lord.]
+			[c/757575:A primordial life energy resides inside.]
+			'''
+	}
+
+	CeruleanAmberMedallion: {
+		DisplayName: Cerulean Amber Medallion{0}
+		Tooltip:
+			'''
+			Increases maximum mana by {0}
+			{1}% reduced mana cost
+			[c/757575:A medallion with cerulean amber inlaid.]
+			[c/757575:The Erdtree's old sap becomes amber, treasured as the most precious of jewels in the age of Godfrey, the first Elden Lord.]
+			[c/757575:A primordial life energy resides inside.]
+			'''
+	}
+
+	CrimsonCeruleanAmberMedallion: {
+		DisplayName: Crimson and Cerulean Amber Medallion{0}
+		Tooltip:
+			'''
+			Increases max HP by {0}%
+			Increases maximum mana by {1}
+			{2}% reduced mana cost
+			'''
+	}
 }
 
 Buffs: {
